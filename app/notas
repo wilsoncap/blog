@@ -62,29 +62,3 @@ despues ejecuto el comando => php artisan db:seed //solo ejecuta el DatabaseSeed
 **como lo uso, en CursoSeeder llamo a la clase Curso:factory(50)->create()
 ** tambien para no llenarme de sender llamo en Datasender a la Clase Curso::factory(50)->create()
 ** luego ejecuto php artisan migrate:fresh --seed;
-
-
-ORM loquent -> generador de consultas en Eloquent
-entro a tinker
-=> php artisan tinker(para entrar)
-=> app App\Models\Curso
-=> $curso = new Curso
-=> $curso = Curso::all() or new Curso
-=> $curso =  Curso::where('categoria', 'Desarrollo web')->get()
-=> $curso =  Curso::where('categoria', 'Desarrollo web')->orderBy('id','desc')->get()
-=> $curso =  Curso::where('categoria', 'Desarrollo web')->orderBy('name','asc')->get()
-=> $curso =  Curso::where('categoria', 'Desarrollo web')->orderBy('name','asc')->first()
-=> $curso =  Curso::select('name', 'description')->get()
-=> $curso =  Curso::select('name', 'description', 'categoria')->orderBy('name', 'asc')->where('categoria', 'Diseño web')->get()
-=> $curso =  Curso::select('name as tittle', 'description', 'categoria')->orderBy('name', 'asc')->where('categoria', 'Diseño web')->get()
-=> $curso =  Curso::select('name', 'description', 'categoria')->where('categoria', 'Diseño web')->take(5)->get()
-=> $curso =  Curso::where('name', 'Consequatur non et sit maxime.')->get()
-=> $curso =  Curso::where('name', 'Consequatur non et sit maxime.')->first()// para acceder al valor del nombre de una propiedad
-=> $curso =  Curso::where('id', 5)->first()
-=> $curso =  Curso::Find(5)
-=> $curso =  Curso::where('id', '>', 45)->get()
-=> $curso =  Curso::where('id', '<>>', 45)->get()
-=> $curso =  Curso::where('name', 'like', '%Nisi%')->get()
-
-
-5 - Mutadores y Accesores - Curso Laravel 9 desde cero.
