@@ -1,0 +1,64 @@
+convencion para crear todas las tablas desde laravel  
+=> php artisan migration
+
+convencion para devolver un cambio antes en la DB  
+=> php artisan migrate:rollback
+
+para actualizar propiedades de alguna tabla hacemos los siguientes password_get_info
+1. ejecutamos el siguiente comando => composer require doctrine/dbal
+2 ejecutamos el siguiente comando => php artisan make:migration cambiar_propiedades_to_users_table
+3. php artisan migrate
+4. php artisan migrate:reset
+
+convencion para crear tablas de una forma mas amigable
+=> php artisan make:migration create_cursos_table
+
+
+Comando para actualizar los campos nuevos de tablas, no es recomendable usarlo en produccion 
+ya que es un metodo destructivo
+=> php artisan migrate:fresh
+
+
+para modificar(agregar, actualizar, borrar) podemos usar la siguiente convencion
+=> php artisan make:migration add_avatar_to_users_table
+
+create model
+para crear un modelo con ql que podamos administrar nuestras tablas de la base de datos
+
+
+
+====================================================================================
+create model
+para crear un modelo con ql que podamos administrar nuestras tablas de la base de datos
+Los modelos se hcrean en singular
+=> php artisan make:model Curso
+
+Se puede ejecutar las funciones de Eloquent desde la terminal con la consola artesanal de laravel
+=> php artisan tinker(para entrar)
+=> app App\Models\Curso
+=> $curso = new Curso
+=> $curso->name = 'Laravel'
+=> $curso->description = 'el mejor famework de php'
+=> $curso(me devuelve un objeto con esa informacion )
+=> $curso->save()// para guardar o actualizar los datos en la DB
+=>exit (para salir)
+
+** si yo quiero no seguri la convecion del modelo curso puedo agragar otra tabla pero ya el modelo no apuntaria a la tabla con la que se creo
+
+
+@@senders-> para llenar la base de datos
+en el sider creo la instancia del modelo que quiero llenar con la tabla
+despues ejecuto el comando => php artisan db:seed //solo ejecuta el DatabaseSeeder
+=> php artisan make:seeder CursoSeeder
+** para poder ejecutar el CursoSeeder lo debo llamar desde DatabaseSeeder $this->call(CursoSeeder::class);
+=> php artisan migrate:fresh --seed // para ejecutar los dos comandos en simultaneo
+=> php artisan migrate --seed // cuando usuamos el repo de alguine y todavia no habimos ejecutado ninguna migracion
+
+
+@@Factory's -> llenan nuestra base de datos con datos de prueba
+=> php artisan make:factory CursoFactory
+=> php artisan make:factory CursoFactory --model=curso // para crear el factory mas directo
+** defino la variable => protected $model = Curso::class;
+**como lo uso, en CursoSeeder llamo a la clase Curso:factory(50)->create()
+** tambien para no llenarme de sender llamo en Datasender a la Clase Curso::factory(50)->create()
+** luego ejecuto php artisan migrate:fresh --seed;
