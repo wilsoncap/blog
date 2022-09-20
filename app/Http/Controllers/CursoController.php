@@ -32,10 +32,31 @@ class CursoController extends Controller
 
 
     //por convencion al metodo para mostrar la pagina para mostrar cualquier cosa, se le llama show
-    public function show($id){
-        $curso = Curso::find($id);
-        // return $curso;
+    public function show(Curso $curso){
+        // $curso = Curso::find($id);
+        // // return $curso;
         // otra  forma de parasa la variable compact('curso') que es igual a ['curso'=>$curso])
         return view('cursos.show', compact('curso'));
+    }
+
+
+    public function edit(Curso $curso){
+        // $curso = Curso::find($id);
+        // return $curso;
+        // return $curso;
+        return view('cursos.edit', compact('curso'));
+    }
+
+    public function update(Request $request, Curso $curso){
+        // return $request;
+        // return $request;
+
+        $curso->name = $request->name;
+        $curso->description = $request->description;
+        $curso->categoria = $request->categoria;  
+        $curso->save();
+        return redirect()->route('cursos.show', $curso->id);
+        
+        
     }
 }
