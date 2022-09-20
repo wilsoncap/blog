@@ -31,7 +31,9 @@ Route::get('/', HomeController::class);
     Route::controller(CursoController::class)->group(function(){
     Route::get('cursos',  'index')->name('cursos.index');
     Route::get('cursos/create',  'create')->name('cursos.create');
-    Route::get('cursos/{curso}',  'show')->name('cursos.show');
+    Route::post('cursos', 'store')->name('cursos.store');
+    Route::get('cursos/{id}',  'show')->name('cursos.show');
+    Route::get('cursos/{id}/edit')->name('cursos.edit');
 });
 
 //el signo ? al fianl de la variable indica que el parametro es opcional

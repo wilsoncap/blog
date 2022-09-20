@@ -5,7 +5,8 @@
 
 @section('content')
     <h1>Bienvenido al curso: {{$curso->name}}</h1>
-    <a href="{{ route('cursos.index')}}">Volver a cursos</a>
+    <a href="{{ route('cursos.index')}}">Volver a cursos</a><br>
+    <a href="">Editar Curso</a>
     <p>Categoria: <strong>{{$curso->categoria}}</strong></p>
     <p>{{$curso->description}}</p>
 @endsection

@@ -9,14 +9,25 @@ class CursoController extends Controller
 {
     //por convencion al metodo principal se le suele llamar index
     public function index(){
-        $cursos = Curso::paginate();
+        $cursos = Curso::orderBy('id', 'desc')->paginate();
         return view('cursos.index', compact('cursos'));
     }
 
    
     //por convencion al metodo para mostrar la pagina para crear cualquier cosa, se le llama create
     public function create(){
-        return "crear curso";
+        return view('cursos.create');
+    }
+
+    public function store(Request $request){
+            // return $request->all();
+        $curso = new Curso();
+
+        $curso->name = $request->name;
+        $curso->description = $request->description;
+        $curso->categoria = $request->categoria;
+        $curso->save();
+        return redirect()->route('cursos.show', $curso->id);
     }
 
 
