@@ -88,3 +88,9 @@ entro a tinker
 
 
 5 - Mutadores y Accesores - Curso Laravel 9 desde cero.
+
+
+=> nombres a las rutas: por recomendacion de laravel se sugiere poner nombres a las rutas para
+que sea mas facil llamaralas desde otro lugar
+-> Route::get('cursos',  'index')->name('cursos.index');//asignando nombre a una ruta
+-> // <a href="{{ route('cursos.create')}}">Crear curso</a> llamando ruta en una vista
