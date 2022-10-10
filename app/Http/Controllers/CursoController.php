@@ -24,15 +24,22 @@ class CursoController extends Controller
     //Almacena todo lo que se le mande en el objeto request, pero simultaneamente me hace las respectivas validaciones
     // si la validacion es exitosa pasa al siguiente punto
     public function store(StoreCurso $request){
-            // return $request->all();
        
+        // $curso = new Curso();
+        // $curso->name = $request->name;
+        // $curso->description = $request->description;
+        // $curso->categoria = $request->categoria;
+        // $curso->save();
 
-       
-        $curso = new Curso();
-        $curso->name = $request->name;
-        $curso->description = $request->description;
-        $curso->categoria = $request->categoria;
-        $curso->save();
+        //asignacion masiva para crear y salvar 
+        // $curso = Curso::create([
+        //     'name'=> $request->name,
+        //     'description' => $request->description,
+        //     'categoria' => $request->categoria
+        // ]);
+
+        $curso = Curso::create($request->all());
+
         return redirect()->route('cursos.show', $curso->id);
     }
 
@@ -56,19 +63,23 @@ class CursoController extends Controller
 
     public function update(Request $request, Curso $curso){
      
-            // $validar = $this->valida($request);
-            $request->validate([
+        $request->validate([
                 'name'=> 'required|max:10',
-            'description'=> 'required|min:10',
-            'categoria'=> 'required'
+                'description'=> 'required|min:10',
+                'categoria'=> 'required'
             ]);
-
-            $curso->name = $request->name;
-            $curso->description = $request->description;
-            $curso->categoria = $request->categoria;  
-            $curso->save();
-            // return $curso;
+            
+            $curso->update($request->all());
             return redirect()->route('cursos.show', $curso->id);
+            
+            // $validar = $this->valida($request);
+            // $curso->name = $request->name;
+            // $curso->description = $request->description;
+            // $curso->categoria = $request->categoria;  
+            // $curso->save();
+            // return $curso;
+
+            //accedo al objeto y de este al metodo update y le paso el request
    
         //     if ($validar) {
         //     }else{
