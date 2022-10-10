@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Curso;
-
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreCurso;
+use App\Http\Traits;
 
 class CursoController extends Controller
 {
@@ -20,14 +21,11 @@ class CursoController extends Controller
         return view('cursos.create');
     }
 
-    public function store(Request $request){
+    //Almacena todo lo que se le mande en el objeto request, pero simultaneamente me hace las respectivas validaciones
+    // si la validacion es exitosa pasa al siguiente punto
+    public function store(StoreCurso $request){
             // return $request->all();
-        $request->validate([
-            'name'=> 'required|max:10',
-            'description'=> 'required|min:10',
-            'categoria'=> 'required'
-
-        ]);
+       
 
        
         $curso = new Curso();
@@ -57,29 +55,32 @@ class CursoController extends Controller
     }
 
     public function update(Request $request, Curso $curso){
-        // return $request;
-        // return $request;
-
-        $request->validate([
-            'name'=> 'required|max:10',
+     
+            // $validar = $this->valida($request);
+            $request->validate([
+                'name'=> 'required|max:10',
             'description'=> 'required|min:10',
             'categoria'=> 'required'
+            ]);
 
-        ]);
+            $curso->name = $request->name;
+            $curso->description = $request->description;
+            $curso->categoria = $request->categoria;  
+            $curso->save();
+            // return $curso;
+            return redirect()->route('cursos.show', $curso->id);
+   
+        //     if ($validar) {
+        //     }else{
+        //         return "error en la validacion";
+        //     }
+           
+        }
 
-        // if ($validacion) {
-            
-        // }else{
-        //     return "error en la validacion";
-        // }
+       
 
-        $curso->name = $request->name;
-        $curso->description = $request->description;
-        $curso->categoria = $request->categoria;  
-        $curso->save();
-        // return $curso;
-        return redirect()->route('cursos.show', $curso->id);
+
         
         
-    }
+    
 }
