@@ -15,8 +15,9 @@ use App\Http\Controllers\CursoController;
 |
 */
 
-Route::get('/', HomeController::class);
+Route::get('/', HomeController::class)->name('home');
 Route::resource('cursos', CursoController::class);
+Route::view('Nosotros', 'nosotros')->name('nosotros');
 // Route::resource('asignaturas', CursoController::class)->parameters(['asignaturas' => 'curso'])->names('cursos');
 
 
